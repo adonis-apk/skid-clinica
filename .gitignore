@@ -1,0 +1,29 @@
+# Archivos a ignorar en Git
+
+# Sistemas operativos
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# Editores
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Node (si se agrega npm en futuro)
+node_modules/
+package-lock.json
+yarn.lock
+
+# Archivos temporales
+temp/
+tmp/
+*.log
+
+# Comprimidos
+*.zip
+*.rar
+*.7z

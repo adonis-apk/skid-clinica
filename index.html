@@ -1,0 +1,1379 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skid - Centro y Rehabilitacion Fisica</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
+            background-attachment: fixed;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 90% 80%, rgba(235, 233, 236, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        body::after {
+            content: 'SKID';
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 200px;
+            font-weight: 900;
+            color: rgba(5, 19, 73, 0.15);
+            white-space: nowrap;
+            pointer-events: none;
+            z-index: -1;
+            letter-spacing: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.9) 0%, rgba(118, 75, 162, 0.9) 100%), url('https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1200&h=200&fit=crop');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 2px;
+            color: #000;
+        }
+
+        .logo .s-letter {
+            color: #001a4d;
+        }
+
+        .logo-img {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .logo::before {
+            display: none;
+        }
+
+        nav {
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        nav a:hover {
+            opacity: 0.8;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .hero {
+            background: url('https://cdn.shopify.com/s/files/1/0146/0813/8340/files/Kine8_480x480.jpg?v=1670349048');
+            background-size: cover;
+            background-position: center;
+            color: rgb(240, 233, 233);
+            padding: 150px 50px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            pointer-events: none;
+        }
+
+        .hero .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .hero h2 {
+            font-size: 30px;
+            margin-bottom: 90px;
+            opacity: 0.80;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: #04295a;
+            color: white;
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            background-color: #ff9500;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 42px;
+            margin: 60px 0 50px;
+            color: #333;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 20px auto 0;
+        }
+
+        .especialidades {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 80px;
+        }
+
+        .especialidad-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .especialidad-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+
+        .especialidad-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        .especialidad-header h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .especialidad-icon {
+            font-size: 48px;
+            margin-bottom: 10px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .especialidad-icon img {
+            width: 500%;
+            height: 380%;
+            object-fit: center;
+            border-radius: 20px;
+        }
+
+        .especialistas {
+            padding: 30px 20px;
+        }
+
+        .especialista {
+            margin-bottom: 25px;
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .especialista:last-child {
+            margin-bottom: 0;
+        }
+
+        .especialista-nombre {
+            font-weight: bold;
+            font-size: 18px;
+            color: #667eea;
+            margin-bottom: 8px;
+        }
+
+        .especialista-titulo {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 12px;
+        }
+
+        .reservar-btn {
+            display: inline-block;
+            background-color: #25d366;
+            color: white;
+            padding: 10px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+            text-align: center;
+        }
+
+        .reservar-btn:hover {
+            background-color: #20a85a;
+            transform: scale(1.05);
+        }
+
+        .about {
+            background: #f9f9f9;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .about p {
+            font-size: 16px;
+            margin: 20px 0;
+            line-height: 1.8;
+        }
+
+        footer {
+            background: #333;
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        footer .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            text-align: left;
+            margin-bottom: 30px;
+        }
+
+        footer h4 {
+            margin-bottom: 15px;
+            color: #ffb347;
+        }
+
+        footer p, footer a {
+            color: #ddd;
+            text-decoration: none;
+            margin: 8px 0;
+        }
+
+        footer a:hover {
+            color: #ffb347;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #555;
+            padding-top: 20px;
+            text-align: center;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background-color: #25d366;
+            color: white;
+            text-decoration: none;
+            font-size: 24px;
+            transition: all 0.3s;
+        }
+
+        .social-links a.instagram {
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+        }
+
+        .social-links a:hover {
+            transform: scale(1.2);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        /* Modal de confirmación */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        .modal.show {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            max-width: 400px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            animation: slideIn 0.3s ease-in;
+        }
+
+        .modal-content h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 24px;
+        }
+
+        .modal-content p {
+            color: #333;
+            margin: 10px 0;
+            font-size: 16px;
+        }
+
+        .modal-content .especialista-info {
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #25d366;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 25px;
+            justify-content: center;
+        }
+
+        .modal-buttons button {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .btn-confirmar {
+            background-color: #25d366;
+            color: white;
+        }
+
+        .btn-confirmar:hover {
+            background-color: #20a85a;
+        }
+
+        .btn-cancelar {
+            background-color: #ddd;
+            color: #333;
+        }
+
+        .btn-cancelar:hover {
+            background-color: #ccc;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Estilos del Carrusel */
+        .carousel-section {
+            background: #f9f9f9;
+            padding: 80px 20px;
+        }
+
+        .carousel-container {
+            position: relative;
+            max-width: 100%;
+            margin: 40px 0;
+            overflow: hidden;
+            border-radius: 0;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+        }
+
+        /* Contenedor interno con ancho máximo centrado */
+        .carousel-container .inner {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .carousel-container {
+            position: relative;
+            max-width: 800px;
+            margin: 40px auto;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        .carousel-slide {
+            display: none;
+            animation: fadeIn 0.8s ease-in-out;
+            min-height: 350px;
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, rgba(102,126,234,0.5) 0%, rgba(118,75,162,0.5) 100%);
+        }
+
+        .carousel-slide .carousel-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.55;
+            z-index: 1;
+            transform: scale(1.02);
+        }
+
+        .carousel-slide::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(0,0,0,0.18) 0%, rgba(0,0,0,0.35) 100%);
+            z-index: 1;
+        }
+
+        .carousel-slide.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .carousel-content {
+            position: relative;
+            z-index: 2;
+            max-width: 760px;
+            margin: 0 auto;
+            background: rgba(0,0,0,0.32);
+            padding: 20px 30px;
+            border-radius: 12px;
+        }
+
+        .carousel-content h3 {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        .carousel-content p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .carousel-btn {
+            display: inline-block;
+            background-color: #ffb347;
+            color: white;
+            padding: 12px 35px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+            z-index: 3;
+        }
+
+        .carousel-btn:hover {
+            background-color: #ff9500;
+            transform: translateY(-3px);
+        }
+
+        .carousel-indicators {
+            text-align: center;
+            padding: 20px;
+            background: white;
+        }
+
+        .indicator {
+            height: 12px;
+            width: 12px;
+            margin: 0 8px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .indicator.active {
+            background-color: #667eea;
+        }
+
+        .indicator:hover {
+            background-color: #764ba2;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 60px;
+                right: 0;
+                background: #667eea;
+                width: 100%;
+                padding: 20px;
+                gap: 10px;
+            }
+
+            nav.active {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .section-title {
+                font-size: 32px;
+                margin: 40px 0 30px;
+            }
+
+            .especialidades {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .especialista-nombre {
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 22px;
+            }
+
+            .hero {
+                padding: 60px 15px;
+            }
+
+            .hero h1 {
+                font-size: 24px;
+            }
+
+            .section-title {
+                font-size: 26px;
+            }
+
+            .cta-button {
+                padding: 12px 30px;
+                font-size: 14px;
+            }
+        }
+
+        /* Sección de Convenios */
+        .convenios {
+            background: white;
+            padding: 80px 20px;
+        }
+
+        .convenios-subtitle {
+            text-align: center;
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 50px;
+        }
+
+        .convenios-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .convenio-card {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 30px 20px;
+            text-align: center;
+            transition: all 0.3s;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .convenio-card:hover {
+            border-color: #667eea;
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .convenio-logo {
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            background: #f5f7fa;
+            border-radius: 8px;
+        }
+
+        .convenio-logo h4 {
+            font-size: 20px;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .convenio-card p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        /* Sección de Comentarios */
+        .comentarios {
+            background: #f9f9f9;
+            padding: 80px 20px;
+        }
+
+        .comentarios-publicados {
+            background: white;
+            padding: 80px 20px;
+        }
+
+        .comentarios-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .comentario-card {
+            background: #f9f9f9;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+            border-left: 4px solid #667eea;
+            transition: all 0.3s;
+        }
+
+        .comentario-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+        }
+
+        .comentario-autor {
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 5px;
+            font-size: 16px;
+        }
+
+        .comentario-especialidad {
+            font-size: 13px;
+            color: #999;
+            margin-bottom: 12px;
+        }
+
+        .comentario-texto {
+            color: #333;
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .comentario-rating {
+            color: #ffc107;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .comentario-fecha {
+            font-size: 12px;
+            color: #bbb;
+        }
+
+        .sin-comentarios {
+            text-align: center;
+            padding: 40px;
+            color: #999;
+        }
+        /* Botón flotante de WhatsApp */
+        .whatsapp-float {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            background: #25d366;
+            color: #fff;
+            padding: 12px 16px;
+            border-radius: 50px;
+            display: inline-flex;
+            gap: 10px;
+            align-items: center;
+            box-shadow: 0 8px 24px rgba(37,211,102,0.18);
+            z-index: 1200;
+            text-decoration: none;
+            font-weight: 700;
+            transition: transform 0.18s ease, box-shadow 0.18s ease;
+        }
+
+        .whatsapp-float:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(37,211,102,0.24);
+        }
+
+        .whatsapp-float svg {
+            width: 20px;
+            height: 20px;
+            flex: 0 0 20px;
+            display: block;
+        }
+
+        .whatsapp-float span {
+            display: inline-block;
+            line-height: 1;
+            font-size: 14px;
+        }
+
+        @media (max-width: 520px) {
+            .whatsapp-float {
+                right: 14px;
+                bottom: 14px;
+                padding: 12px;
+                border-radius: 50%;
+            }
+            .whatsapp-float span { display: none; }
+        }
+        .whatsapp-float img { width:20px; height:20px; display:block; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo"><span class="s-letter">S</span>KID <img src="https://www.kinesiologia-sante.com.ar/img/logo_sante2.png" alt="Skid Logo" class="logo-img"></div>
+            <nav id="nav-menu">
+                <a href="#inicio">Inicio</a>
+                <a href="#especialidades">Especialidades</a>
+                <a href="#acerca">Acerca de</a>
+                <a href="#contacto">Contacto</a>
+            </nav>
+            <button class="menu-toggle" id="menu-toggle">☰</button>
+        </div>
+    </header>
+
+    <section class="hero" id="inicio">
+        <div class="container">
+            <h1>Bienvenido a Skid Kinesiologia</h1>
+            <h2>Salud Kinesica Integral y Deportiva</h2>
+            <a href="#especialidades" class="cta-button">Conoce Nuestros Servicios</a>
+        </div>
+    </section>
+
+    <!-- Carrusel de Servicios -->
+    <section class="carousel-section">
+        <div class="container">
+            <h2 class="section-title">Nuestros Servicios Destacados</h2>
+            <div class="carousel-container">
+                <div class="carousel-slide active">
+                    <img class="carousel-img" src="https://images.unsplash.com/photo-1517964101417-5c5b1a5f3e5a?w=1600&h=900&fit=crop" alt="Kinesiología Deportiva">
+                    <div class="carousel-content">
+                        <h3>Kinesiología Deportiva</h3>
+                        <p>Rehabilitación especializada para lesiones deportivas y mejora del rendimiento físico.</p>
+                        <a href="#especialidades" class="carousel-btn">Ver Más</a>
+                    </div>
+                </div>
+                <div class="carousel-slide">
+                    <img class="carousel-img" src="https://images.unsplash.com/photo-1544025162-d76694265947?w=1600&h=900&fit=crop" alt="Nutrición Personalizada">
+                    <div class="carousel-content">
+                        <h3>Nutrición Personalizada</h3>
+                        <p>Planes alimenticios diseñados específicamente para tus necesidades y objetivos de salud.</p>
+                        <a href="#especialidades" class="carousel-btn">Ver Más</a>
+                    </div>
+                </div>
+                <div class="carousel-slide">
+                    <img class="carousel-img" src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=1600&h=900&fit=crop" alt="Apoyo Psicológico">
+                    <div class="carousel-content">
+                        <h3>Apoyo Psicológico</h3>
+                        <p>Terapia profesional para tu bienestar emocional y mental.</p>
+                        <a href="#especialidades" class="carousel-btn">Ver Más</a>
+                    </div>
+                </div>
+                <div class="carousel-slide">
+                    <img class="carousel-img" src="https://images.unsplash.com/photo-1526256262350-7da7584cf5eb?w=1600&h=900&fit=crop" alt="Terapia del Lenguaje">
+                    <div class="carousel-content">
+                        <h3>Terapia del Lenguaje</h3>
+                        <p>Tratamiento especializado para mejorar la comunicación y audición.</p>
+                        <a href="#especialidades" class="carousel-btn">Ver Más</a>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-indicators">
+                <span class="indicator active" onclick="currentSlide(1)"></span>
+                <span class="indicator" onclick="currentSlide(2)"></span>
+                <span class="indicator" onclick="currentSlide(3)"></span>
+                <span class="indicator" onclick="currentSlide(4)"></span>
+            </div>
+        </div>
+    </section>
+
+    <section id="especialidades">
+        <div class="container">
+            <h2 class="section-title">Nuestras Especialidades</h2>
+            
+            <div class="especialidades">
+                <!-- KINESIOLOGÍA -->
+                <div class="especialidad-card">
+                    <div class="especialidad-header">
+                        <div class="especialidad-icon"><img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=300&h=300&fit=crop" alt="Kinesiología"></div>
+                        <h2>Kinesiología</h2>
+                        <p>Rehabilitación y movimiento</p>
+                    </div>
+                    <div class="especialistas">
+                        <div class="especialista">
+                            <div class="especialista-nombre">Lic. Pablo Martínez</div>
+                            <div class="especialista-titulo">Kinésiologo Deportivo</div>
+                            <p style="font-size: 13px; color: #777; margin: 10px 0;">Especializado en lesiones deportivas y rehabilitación postoperatoria.</p>
+                            <a href="https://wa.me/56975472887?text=Hola%20Pablo,%20me%20gustaría%20agendar%20una%20cita%20médica%20de%20kinesiología.%20¿Cuál%20es%20tu%20disponibilidad?" target="_blank" class="reservar-btn">Reservar con Pablo</a>
+                        </div>
+                        <div class="especialista">
+                            <div class="especialista-nombre">Lic. María López</div>
+                            <div class="especialista-titulo">Kinésiologa Clínica</div>
+                            <p style="font-size: 13px; color: #777; margin: 10px 0;">Especializada en tratamiento de dolor crónico y recuperación funcional.</p>
+                            <a href="https://wa.me/5491234567891?text=Hola%20María,%20me%20gustaría%20agendar%20una%20cita%20médica%20de%20kinesiología.%20¿Cuál%20es%20tu%20disponibilidad?" target="_blank" class="reservar-btn">Reservar con María</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- NUTRICIÓN -->
+                <div class="especialidad-card">
+                    <div class="especialidad-header">
+                        <div class="especialidad-icon"><img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=300&h=300&fit=crop" alt="Nutrición"></div>
+                        <h2>Nutrición</h2>
+                        <p>Planes alimenticios personalizados</p>
+                    </div>
+                    <div class="especialistas">
+                        <div class="especialista">
+                            <div class="especialista-nombre">Lic. Carlos Rodríguez</div>
+                            <div class="especialista-titulo">Nutricionista Clínico</div>
+                            <p style="font-size: 13px; color: #777; margin: 10px 0;">Especializado en nutrición deportiva y manejo de enfermedades crónicas.</p>
+                            <a href="https://wa.me/5491234567892?text=Hola%20Carlos,%20me%20gustaría%20agendar%20una%20cita%20médica%20de%20nutrición.%20¿Cuál%20es%20tu%20disponibilidad?" target="_blank" class="reservar-btn">Agendar Cita</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PSICOLOGÍA -->
+                <div class="especialidad-card">
+                    <div class="especialidad-header">
+                        <div class="especialidad-icon"><img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=300&h=300&fit=crop" alt="Psicología"></div>
+                        <h2>Psicología</h2>
+                        <p>Apoyo emocional y terapia</p>
+                    </div>
+                    <div class="especialistas">
+                        <div class="especialista">
+                            <div class="especialista-nombre">Lic. Sandra Hernández</div>
+                            <div class="especialista-titulo">Psicóloga Clínica</div>
+                            <p style="font-size: 13px; color: #777; margin: 10px 0;">Especializada en terapia cognitivo-conductual y manejo del estrés.</p>
+                            <a href="https://wa.me/5491234567893?text=Hola%20Sandra,%20me%20gustaría%20agendar%20una%20cita%20médica%20de%20psicología.%20¿Cuál%20es%20tu%20disponibilidad?" target="_blank" class="reservar-btn">Agendar Cita</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FONOAUDIOLOGÍA -->
+                <div class="especialidad-card">
+                    <div class="especialidad-header">
+                        <div class="especialidad-icon"><img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=300&h=300&fit=crop" alt="Fonoaudiología"></div>
+                        <h2>Fonoaudiología</h2>
+                        <p>Problemas de comunicación y audición</p>
+                    </div>
+                    <div class="especialistas">
+                        <div class="especialista">
+                            <div class="especialista-nombre">Lic. Roberto Fernández</div>
+                            <div class="especialista-titulo">Fonoaudiólogo</div>
+                            <p style="font-size: 13px; color: #777; margin: 10px 0;">Especializado en terapia del lenguaje y rehabilitación auditiva.</p>
+                            <a href="https://wa.me/5491234567894?text=Hola%20Roberto,%20me%20gustaría%20agendar%20una%20cita%20médica%20de%20fonoaudiología.%20¿Cuál%20es%20tu%20disponibilidad?" target="_blank" class="reservar-btn">Agendar Cita</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Convenios -->
+    <section class="convenios" id="convenios">
+        <div class="container">
+            <h2 class="section-title">Nuestros Convenios</h2>
+            <p class="convenios-subtitle">Trabajamos con las principales aseguradoras y sistemas de salud</p>
+            
+            <div class="convenios-grid">
+                <div class="convenio-card">
+                    <div class="convenio-logo">
+                        <h4>FONASA</h4>
+                    </div>
+                    <p>Fondo Nacional de Salud</p>
+                </div>
+                <div class="convenio-card">
+                    <div class="convenio-logo">
+                        <h4>ISAPRE</h4>
+                    </div>
+                    <p>Instituciones de Salud Previsional</p>
+                </div>
+                <div class="convenio-card">
+                    <div class="convenio-logo">
+                        <h4>SEGUROS</h4>
+                    </div>
+                    <p>Seguros de Salud Privados</p>
+                </div>
+                <div class="convenio-card">
+                    <div class="convenio-logo">
+                        <h4>PARTICULAR</h4>
+                    </div>
+                    <p>Atención Particular Directa</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Formulario de Comentarios -->
+    <section class="comentarios" id="comentarios">
+        <div class="container">
+            <h2 class="section-title">Deja tu Comentario</h2>
+            <p style="text-align: center; font-size: 18px; color: #666; margin-bottom: 50px;">Cuéntanos tu experiencia con nuestros servicios</p>
+            
+            <div style="max-width: 600px; margin: 0 auto; background: white; padding: 40px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.1);">
+                <form id="formularioComentarios">
+                    <div style="margin-bottom: 20px;">
+                        <label for="nombre" style="display: block; font-weight: bold; color: #333; margin-bottom: 8px;">Nombre *</label>
+                        <input type="text" id="nombre" name="nombre" required style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px; box-sizing: border-box;">
+                    </div>
+
+                    <div style="margin-bottom: 20px;">
+                        <label for="email" style="display: block; font-weight: bold; color: #333; margin-bottom: 8px;">Email *</label>
+                        <input type="email" id="email" name="email" required style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px; box-sizing: border-box;">
+                    </div>
+
+                    <div style="margin-bottom: 20px;">
+                        <label for="especialidad" style="display: block; font-weight: bold; color: #333; margin-bottom: 8px;">Especialidad *</label>
+                        <select id="especialidad" name="especialidad" required style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px; box-sizing: border-box;">
+                            <option value="">-- Selecciona una especialidad --</option>
+                            <option value="Kinesiología">Kinesiología</option>
+                            <option value="Nutrición">Nutrición</option>
+                            <option value="Psicología">Psicología</option>
+                            <option value="Fonoaudiología">Fonoaudiología</option>
+                            <option value="Otra">Otra</option>
+                        </select>
+                    </div>
+
+                    <div style="margin-bottom: 20px;">
+                        <label for="calificacion" style="display: block; font-weight: bold; color: #333; margin-bottom: 8px;">Calificación *</label>
+                        <select id="calificacion" name="calificacion" required style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px; box-sizing: border-box;">
+                            <option value="">-- Selecciona una calificación --</option>
+                            <option value="⭐">⭐ Muy Malo</option>
+                            <option value="⭐⭐">⭐⭐ Malo</option>
+                            <option value="⭐⭐⭐">⭐⭐⭐ Regular</option>
+                            <option value="⭐⭐⭐⭐">⭐⭐⭐⭐ Bueno</option>
+                            <option value="⭐⭐⭐⭐⭐">⭐⭐⭐⭐⭐ Excelente</option>
+                        </select>
+                    </div>
+
+                    <div style="margin-bottom: 25px;">
+                        <label for="comentario" style="display: block; font-weight: bold; color: #333; margin-bottom: 8px;">Comentario *</label>
+                        <textarea id="comentario" name="comentario" required rows="6" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px; font-family: inherit; box-sizing: border-box; resize: vertical;"></textarea>
+                    </div>
+
+                    <button type="submit" style="width: 100%; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 14px; border: none; border-radius: 25px; font-weight: bold; font-size: 16px; cursor: pointer; transition: all 0.3s;">
+                        Enviar Comentario
+                    </button>
+                </form>
+                <div id="mensajeExito" style="display: none; margin-top: 20px; padding: 15px; background: #d4edda; color: #155724; border-radius: 8px; text-align: center; font-weight: bold;">
+                    ¡Gracias por tu comentario! Pronto será publicado en nuestro sitio.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Comentarios Publicados -->
+    <section class="comentarios-publicados" id="comentarios-publicados">
+        <div class="container">
+            <h2 class="section-title">Comentarios de Pacientes</h2>
+            <div id="comentariosContainer" class="comentarios-grid">
+                <div class="sin-comentarios">
+                    <p>Aún no hay comentarios. ¡Sé el primero en dejar tu opinión!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="about" id="acerca">
+        <div class="container">
+            <div class="about-content">
+                <h2 class="section-title">Acerca de Nosotros</h2>
+                <p><b>SKID</b> es un centro integral de salud dedicado a brindar atención de calidad en múltiples especialidades. Nuestro equipo de profesionales altamente capacitados está comprometido con tu bienestar y recuperación.</p>
+                <p>Ofrecemos un ambiente cómodo y moderno donde los pacientes pueden recibir tratamiento personalizado adaptado a sus necesidades específicas.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contacto">
+        <div class="container">
+            <div>
+                <h4>Contacto</h4>
+                <p>📱 Teléfono: +54 9 1234 567890</p>
+                <p>📧 Email: info@clinicasalud.com</p>
+                <p>📍 Dirección: calle las amapolas 344 Pucón</p>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3047.8657444765093!2d-71.97176632346163!3d-39.30775867140845!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9629a0a0a0a0a0a1%3A0x0!2sCalle%20Las%20Amapolas%20344%2C%20Puc%C3%B3n!5e0!3m2!1ses!2scl!4v1732715400000" width="100%" height="250" style="border:0; border-radius: 8px; margin-top: 15px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <div class="social-links">
+                    <a href="https://wa.me/5491234567890" target="_blank" title="WhatsApp" aria-label="WhatsApp">
+                        <img src="https://img.icons8.com/ios-filled/50/ffffff/whatsapp.png" alt="WhatsApp" style="width:24px;height:24px;display:block;filter:brightness(0) invert(1);" />
+                    </a>
+                    <a href="https://www.instagram.com/skid.movimientoysalud?igsh=MThkeWUzejhseG02dA==" target="_blank" class="instagram" title="Instagram">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163C8.756 0 8.331.012 7.052.07 2.696.278.777 2.197.57 6.52.012 7.8 0 8.224 0 12c0 3.775.012 4.2.07 5.48.207 4.323 2.126 6.242 6.449 6.449 1.28.058 1.704.07 5.48.07 3.776 0 4.2-.012 5.48-.07 4.323-.207 6.242-2.126 6.449-6.449.058-1.28.07-1.704.07-5.48 0-3.776-.012-4.2-.07-5.48C23.722 2.697 21.803.778 17.48.57 16.2.012 15.776 0 12 0z"/>
+                            <circle cx="12" cy="12" r="3.846"/>
+                            <circle cx="18.406" cy="5.594" r=".9"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            <div>
+                <h4>Horarios</h4>
+                <p>Lunes a Viernes: 8:00 AM - 18:00 PM</p>
+                <p>Sábado: 9:00 AM - 13:00 PM</p>
+                <p>Domingo: Cerrado</p>
+            </div>
+            <div>
+                <h4>Enlaces Rápidos</h4>
+                <a href="#inicio">Inicio</a><br>
+                <a href="#especialidades">Especialidades</a><br>
+                <a href="#acerca">Acerca de</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 ClinicaSalud. Todos los derechos reservados. | Diseño web profesional</p>
+        </div>
+    </footer>
+
+    <!-- Modal de confirmación -->
+    <div id="confirmacionModal" class="modal">
+        <div class="modal-content">
+            <h3>✅ Confirmación de Cita</h3>
+            <p>¡Gracias por tu interés!</p>
+            <div class="especialista-info">
+                <p id="especialistaInfo" style="margin: 0;"></p>
+            </div>
+            <p style="font-size: 14px; color: #666;">Confirma para continuar a WhatsApp</p>
+            <div class="modal-buttons">
+                <button class="btn-confirmar" id="btnConfirmar">Continuar a WhatsApp</button>
+                <button class="btn-cancelar" id="btnCancelar">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Menú móvil
+        const menuToggle = document.getElementById('menu-toggle');
+        const navMenu = document.getElementById('nav-menu');
+
+        menuToggle.addEventListener('click', function() {
+            navMenu.classList.toggle('active');
+        });
+
+        // Cerrar menú al hacer clic en un enlace
+        const navLinks = navMenu.querySelectorAll('a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Scroll suave
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Carrusel automático
+        let slideIndex = 1;
+        let slideTimer;
+
+        function showSlide(n) {
+            const slides = document.getElementsByClassName('carousel-slide');
+            const indicators = document.getElementsByClassName('indicator');
+            
+            if (n > slides.length) {
+                slideIndex = 1;
+            }
+            if (n < 1) {
+                slideIndex = slides.length;
+            }
+            
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].classList.remove('active');
+            }
+            for (let i = 0; i < indicators.length; i++) {
+                indicators[i].classList.remove('active');
+            }
+            
+            slides[slideIndex - 1].classList.add('active');
+            indicators[slideIndex - 1].classList.add('active');
+        }
+
+        function currentSlide(n) {
+            clearTimeout(slideTimer);
+            showSlide(slideIndex = n);
+            autoSlide();
+        }
+
+        function autoSlide() {
+            slideIndex++;
+            showSlide(slideIndex);
+            slideTimer = setTimeout(autoSlide, 5000); // Cambia cada 5 segundos
+        }
+
+        // Iniciar carrusel
+        if (document.querySelector('.carousel-slide')) {
+            autoSlide();
+        }
+
+        // Formulario de Comentarios
+        document.getElementById('formularioComentarios').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const nombre = document.getElementById('nombre').value;
+            const email = document.getElementById('email').value;
+            const especialidad = document.getElementById('especialidad').value;
+            const calificacion = document.getElementById('calificacion').value;
+            const comentario = document.getElementById('comentario').value;
+            
+            // Crear objeto del comentario
+            const nuevoComentario = {
+                nombre,
+                email,
+                especialidad,
+                calificacion,
+                comentario,
+                fecha: new Date().toLocaleDateString('es-ES')
+            };
+            
+            // Obtener comentarios anteriores o crear nuevo array
+            let comentarios = JSON.parse(localStorage.getItem('comentarios')) || [];
+            
+            // Añadir nuevo comentario
+            comentarios.unshift(nuevoComentario);
+            
+            // Guardar en localStorage
+            localStorage.setItem('comentarios', JSON.stringify(comentarios));
+            
+            // Mostrar mensaje de éxito
+            document.getElementById('formularioComentarios').style.display = 'none';
+            document.getElementById('mensajeExito').style.display = 'block';
+            
+            // Actualizar vista de comentarios
+            mostrarComentarios();
+            
+            // Resetear formulario después de 2 segundos
+            setTimeout(() => {
+                document.getElementById('formularioComentarios').reset();
+                document.getElementById('formularioComentarios').style.display = 'block';
+                document.getElementById('mensajeExito').style.display = 'none';
+            }, 3000);
+        });
+
+        // Función para mostrar comentarios guardados
+        function mostrarComentarios() {
+            const comentarios = JSON.parse(localStorage.getItem('comentarios')) || [];
+            const container = document.getElementById('comentariosContainer');
+            
+            if (comentarios.length === 0) {
+                container.innerHTML = '<div class="sin-comentarios"><p>Aún no hay comentarios. ¡Sé el primero en dejar tu opinión!</p></div>';
+                return;
+            }
+            
+            container.innerHTML = '';
+            comentarios.forEach(com => {
+                const card = document.createElement('div');
+                card.className = 'comentario-card';
+                card.innerHTML = `
+                    <div class="comentario-autor">${com.nombre}</div>
+                    <div class="comentario-especialidad">Especialidad: ${com.especialidad}</div>
+                    <div class="comentario-rating">${com.calificacion}</div>
+                    <div class="comentario-texto">"${com.comentario}"</div>
+                    <div class="comentario-fecha">${com.fecha}</div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // Mostrar comentarios al cargar la página
+        document.addEventListener('DOMContentLoaded', mostrarComentarios);
+
+        // Mensaje al reservar cita
+        document.querySelectorAll('.reservar-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const especialista = this.textContent.trim();
+                const especialidad = this.closest('.especialidad-card').querySelector('h2').textContent;
+                const enlaceWhatsApp = this.getAttribute('href');
+        // Reemplaza el SVG interno del botón flotante por un ícono oficial de WhatsApp (imagen blanca)
+        (function replaceWhatsappSvg() {
+            const btn = document.querySelector('.whatsapp-float');
+            if (!btn) return;
+            const svg = btn.querySelector('svg');
+            if (svg) {
+                const img = document.createElement('img');
+                img.src = 'https://img.icons8.com/ios-filled/50/ffffff/whatsapp.png';
+                img.alt = 'WhatsApp';
+                img.style.width = '20px';
+                img.style.height = '20px';
+                img.style.display = 'block';
+                svg.replaceWith(img);
+            }
+        })();
+                
+                // Mostrar modal
+                const modal = document.getElementById('confirmacionModal');
+                const especialistaInfo = document.getElementById('especialistaInfo');
+                
+                especialistaInfo.innerHTML = `<strong>${especialista}</strong><br><small style="color: #666;">Especialidad: ${especialidad}</small>`;
+                
+                modal.classList.add('show');
+                
+                // Botón confirmar
+                document.getElementById('btnConfirmar').onclick = function() {
+                    modal.classList.remove('show');
+                    window.open(enlaceWhatsApp, '_blank');
+                };
+                
+                // Botón cancelar
+                document.getElementById('btnCancelar').onclick = function() {
+                    modal.classList.remove('show');
+                };
+                
+                // Cerrar modal al hacer clic fuera
+                modal.addEventListener('click', function(e) {
+                    if (e.target === modal) {
+                        modal.classList.remove('show');
+                    }
+                });
+            });
+        });
+    </script>
+    <!-- Botón WhatsApp flotante -->
+    <a href="https://wa.me/56975472887?text=Hola%2C%20quiero%20m%C3%A1s%20informaci%C3%B3n%20sobre%20sus%20servicios" target="_blank" class="whatsapp-float" aria-label="Escríbenos por WhatsApp">
+        <img src="https://img.icons8.com/ios-filled/50/ffffff/whatsapp.png" alt="WhatsApp" style="width:20px;height:20px;display:block;" />
+        <span>Escríbenos</span>
+    </a>
+</body>
+</html>
